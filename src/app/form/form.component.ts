@@ -28,6 +28,9 @@ export class FormComponent {
 
   onSubmit(e: Event) {
     e.preventDefault();
-    this._newState.push(this._localState);
+    if (this.localState.trim()) {
+      this.newState.push(this.localState.trim());
+      this.localState = '';
+    }
   }
 }

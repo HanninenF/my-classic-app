@@ -5,7 +5,5 @@
   <button type="submit">SKICKA</button>
 </form>
 <ul>
-  {{newState.map((i)=>{
-  <li>i</li>
-  })}}
+  <li *ngFor="let i of newState">{{ i }}</li>
 </ul>
