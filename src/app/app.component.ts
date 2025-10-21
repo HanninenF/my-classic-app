@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `<h1>Angular</h1>
+    <courses></courses>
+    <app-form></app-form>
+    <app-list></app-list> `,
   standalone: false,
   styleUrl: './app.component.scss',
 })

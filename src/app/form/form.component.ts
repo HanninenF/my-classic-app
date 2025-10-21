@@ -3,7 +3,20 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-form',
   standalone: false,
-  templateUrl: './form.component.html',
+  template: `<h2>{{ localState }}</h2>
+    <form (ngSubmit)="onSubmit($event)" #f="ngForm">
+      <label for="textInput">INPUT</label>
+      <input
+        id="textInput"
+        name="textInput"
+        type="text"
+        [(ngModel)]="localState"
+      />
+      <button type="submit">SKICKA</button>
+    </form>
+    <ul>
+      <li *ngFor="let i of newState">{{ i }}</li>
+    </ul> `,
   styleUrl: './form.component.scss',
 })
 export class FormComponent {
