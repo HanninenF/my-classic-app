@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-list',
   standalone: false,
   template: ` <ul>
-    <li *ngFor="let g of glossary">
+    <li class="glossary-list" *ngFor="let g of glossary">
       <h2>{{ g.term }}</h2>
       <p>{{ g.definition }}</p>
     </li>
@@ -27,17 +27,19 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const course = params.get('course') ?? undefined;
+      const sort = params.get('sort') ?? undefined; // 'latest', 'alpha', osv.
+
       this.loading = true;
       this.error = null;
 
-      this.glossaryService.getGlossary(course).subscribe({
-        next: (data: GlossaryItem[]) => {
+      this.glossaryService.getGlossary({ course, sort }).subscribe({
+        next: (data) => {
           this.glossary = data;
           this.loading = false;
         },
-        error: (err: unknown) => {
+        error: (err) => {
           const msg = err instanceof Error ? err.message : String(err);
-          this.error = msg ?? 'Något gick fel';
+          this.error = msg || 'Något gick fel';
           this.loading = false;
         },
       });
