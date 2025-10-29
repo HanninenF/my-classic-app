@@ -21,3 +21,12 @@ export interface Course {
   hve_credits: number;
   weblink: string;
 }
+export type QueryOpts = {
+  domain?: string;
+  kind?: string;
+  course?: string;
+  q?: string;
+  sort?: string; // 'latest' | 'alpha' etc.
+  page?: number;
+  limit?: number;
+};
