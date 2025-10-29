@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GlossaryItem } from '../list/types';
+import { GlossaryItem, QueryOpts } from '../list/types';
 import { map, Observable } from 'rxjs';
-
+import { Root } from '../list/types';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,23 +12,23 @@ export class GlossaryService {
 
   constructor(private http: HttpClient) {}
 
-  getGlossary(
-    opts: { course?: string; sort?: string } = {}
-  ): Observable<GlossaryItem[]> {
+  getGlossary(opts: QueryOpts = {}): Observable<GlossaryItem[]> {
     let params = new HttpParams();
-    if (opts.course) params = params.set('course', opts.course);
-    if (opts.sort) params = params.set('sort', opts.sort);
+    for (const [k, v] of Object.entries(opts)) {
+      if (v !== undefined && v !== null && String(v) !== '') {
+        params = params.set(k, String(v));
+      }
+    }
 
-    return this.http
-      .get<{ data: GlossaryItem[] }>(this.baseUrl, { params })
-      .pipe(
-        map((response) =>
-          response.data.map((g) => ({
-            ...g,
-            term: this.capitalizeTerm(g.term),
-          }))
-        )
-      );
+    return this.http.get<Root>(this.baseUrl, { params }).pipe(
+      map((res) => (Array.isArray(res.data) ? res.data : [])),
+      map((items) =>
+        items.map((g) => ({
+          ...g,
+          term: this.capitalizeTerm(g.term),
+        }))
+      )
+    );
   }
 
   private capitalizeTerm(term?: string): string {
