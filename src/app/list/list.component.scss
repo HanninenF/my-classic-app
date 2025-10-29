@@ -1,3 +1,28 @@
-.glossary-list {
-  justify-items: center;
+.glossary_container {
+  list-style-type: none;
+  padding: 0;
+  .glossary_list {
+    max-width: 25em;
+    justify-items: center;
+    border-bottom: solid hsl(245 3% 61% / 1);
+    .term {
+      font-size: 1.5em;
+      margin: 0.8em 0 0.2em 0;
+      /*    text-decoration: underline;
+      text-decoration-color: #99999f;
+      text-decoration-style: solid;
+      text-decoration-thickness: 0.9px;
+      text-underline-offset: 3.7px; */
+    }
+    .definition {
+      font-size: 1em;
+      margin: 0.5em 0 0.5em 0;
+    }
+    .bulletPoints_container {
+      margin: 0.5em 0 0.5em 0;
+      .bulletPoints_list {
+        color: #d3cd9d;
+      }
+    }
+  }
 }

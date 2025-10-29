@@ -15,10 +15,19 @@ import {
 @Component({
   selector: 'app-list',
   standalone: false,
-  template: ` <ul>
-    <li class="glossary-list" *ngFor="let g of glossary">
-      <h2>{{ g.term }}</h2>
-      <p>{{ g.definition }}</p>
+  template: ` <ul class="glossary_container">
+    <li class="glossary_list" *ngFor="let g of glossary">
+      <h2 class="term">{{ g.term }}</h2>
+      <p class="definition">{{ g.definition }}</p>
+
+      <ul
+        class="bulletPoints_container"
+        *ngIf="g.bulletPoints && g.bulletPoints.length"
+      >
+        <li class="bulletPoints_list" *ngFor="let b of g.bulletPoints">
+          {{ b }}
+        </li>
+      </ul>
     </li>
   </ul>`,
   styleUrl: './list.component.scss',
