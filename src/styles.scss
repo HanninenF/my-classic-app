@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-app-root {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+html {
+  background-color: hsl(-338 3% 18% / 1);
+  color: hsl(47 43% 94% / 1);
+
+  app-root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
